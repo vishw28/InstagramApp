@@ -1,12 +1,9 @@
 /**
  * Created by Vishw on 12/26/2016.
  */
-<<<<<<< HEAD
-=======
-
 (function () {
     'use strict'
-    var app = angular.module('myApp',['ngRoute','ngResource']);
+    var app = angular.module('myApp',['ngRoute','bootstrapLightbox']);
 
     app.config(['$routeProvider',function ($routeProvider) {
             $routeProvider
@@ -18,4 +15,3 @@
                 .otherwise({redirectTo:'/gallery'});
     }])
 })();
->>>>>>> 179b436... implemented(instagram service)

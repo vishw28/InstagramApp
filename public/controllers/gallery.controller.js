@@ -8,23 +8,27 @@
         .controller('GalleryController',GalleryController);
 
 
-        function GalleryController($sce,$http) {
+        function GalleryController($sce,$http,Lightbox) {
             var gc = this;
-            gc.Url = $sce.trustAsResourceUrl('https://api.instagram.com/v1/users/self/media/recent/?access_token=YOUR_ACCESS_TOKEN');
+            gc.Url = $sce.trustAsResourceUrl('https://api.instagram.com/v1/users/self/media/recent/?access_token=YOUR_ACCESS_TOKEN&count=35');
 
             gc.images = [];
+            var imgArray = [];
 
             $http.jsonp(gc.Url)
                 .then(function (response) {
 
                     gc.images=response.data.data;
-
-                    console.log(gc.images);
+                    angular.forEach(gc.images,function (value) {
+                        imgArray.push(value.images.standard_resolution);
+                    });
+                    gc.openLightboxModal = function (index) {
+                        Lightbox.openModal(imgArray,index);
+                    }
 
                 },(function (error) {
                     console.log(error);
                 }));
-
         }
 
 })();
